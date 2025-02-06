@@ -7,7 +7,7 @@
     <title>Document</title>
 </head>
 <body>
-    <form action="{{ route('appointments.store') }}" method="POST">
+    <form action="{{ route('materias.store') }}" method="POST">
         @csrf
 
         <div class="form-group">
