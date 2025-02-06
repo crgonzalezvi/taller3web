@@ -20,7 +20,6 @@ return new class extends Migration
             $table->float('nota')->nullable();
             $table->unsignedBigInteger('role_id')->default(2);
             $table->foreign('role_id')->references('id')->on('roles');
-
             $table->timestamps();
         });
 

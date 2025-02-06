@@ -20,3 +20,16 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Route::middleware('auth','role:estudiante')->group(function () {
+    Route::get('/estudiante', function (){
+        return "estudiante";
+
+    });
+});
+Route::middleware('auth','role:docente')->group(function () {
+    Route::get('/docente', function (){
+        return "docente";
+
+    });
+});
