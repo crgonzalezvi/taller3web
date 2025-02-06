@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('students', function (Blueprint $table) {
             $table->id();
             $table->float('nota');
-            $table->unsignedBigInteger('mate_id')->default(2);
+            $table->unsignedBigInteger('mate_id');
             $table->foreign('mate_id')->references('id')->on('materias');
             $table->foreign('id')->references('id')->on('users')->onDelete('cascade');
 

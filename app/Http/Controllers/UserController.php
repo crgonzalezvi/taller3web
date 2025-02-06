@@ -11,8 +11,8 @@ class UserController extends Controller
      */
     public function index()
     {
-        $user=Role::all();
-        return view('roles.index', compact('roles'));
+        $users=User::all();
+        return view('users.index', compact('users'));
     }
 
     /**
@@ -20,7 +20,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        //
+
     }
 
     /**
@@ -28,7 +28,10 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $user = new User();
+        $user->nota = $request->nota;
+        $user->save();
+        return redirect()->route('roles.index');
     }
 
     /**
@@ -44,7 +47,8 @@ class UserController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $user = User::findOrFail($id);
+        return view('users.edit', compact('users'));
     }
 
     /**
@@ -52,7 +56,10 @@ class UserController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $user = User::findOrFail($id);
+        $user->nota=$request->nota;
+        $user->save();
+        return redirect()->route('users.index');
     }
 
     /**
