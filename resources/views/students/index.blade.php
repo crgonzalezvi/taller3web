@@ -7,12 +7,25 @@
     <title>Document</title>
 </head>
 <body>
-    <form action="{{ route('courses.store') }}" method="POST">
+    @if(session('success'))
+        <div style="color: green; font-weight: bold;">
+            {{ session('success') }}
+        </div>
+    @endif
+
+    @if(session('error'))
+        <div style="color: red; font-weight: bold;">
+            {{ session('error') }}
+        </div>
+    @endif
+    
+    <form action="{{ route('students.inscript') }}" method="POST">
+    
         @csrf
 
-        <div class="form-group">
-            <label for="materia">Materia</label>
-            <select class="form-control" id="materia" name="materia" required>
+        <div class="mb-3">
+            <label for="course_id" class="form-label">Seleccione una Materia</label>
+            <select class="form-control" id="course_id" name="course_id" required>
                 <option value="">Seleccione una materia</option>
                 @foreach ($courses as $course)
                     <option value="{{ $course->id }}">{{ $course->name }}</option>
@@ -20,8 +33,7 @@
             </select>
         </div>
 
-
-        <button type="submit" class="btn btn-primary">Inscribir</button>
+        <button type="submit" class="btn btn-primary">Inscribirse</button>
     </form>
 </body>
 </html>

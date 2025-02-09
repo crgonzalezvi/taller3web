@@ -22,17 +22,15 @@
         <tbody>
             @foreach($students as $student)
                 <tr>
-                    <td>{{ $student->id }}</td>
-                    <td>{{ $student->name }}</td>
-                    <td>{{ $student->user->email }}</td>
-                    <td>{{ $student->specialty->name }}</td>
-                    <td>{{ $student->user->telefono }}</td>
+                    <td>{{ $user->id }}</td>
+                    <td>{{ $user->name }}</td>
+                    <td>{{ $user->nota }}</td>
                     <td>
-                        <a href="{{ route('doctors.edit', $doctor->id) }}" class="btn btn-primary">Editar</a>
-                        <form action="{{ route('doctors.destroy', $doctor->id) }}" method="POST" class="d-inline">
+                        <a href="{{ route('users.edit', $user->id) }}" class="btn btn-primary">Editar</a>
+                        <form action="{{ route('users.destroy', $user->id) }}" method="POST" class="d-inline">
                             @csrf
                             @method('DELETE')
-                            <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('¿Estás seguro de eliminar este doctor?')">Eliminar</button>
+                            <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('¿Estás seguro de eliminar este estudiante?')">Eliminar</button>
                         </form>
                     </td>
                 </tr>

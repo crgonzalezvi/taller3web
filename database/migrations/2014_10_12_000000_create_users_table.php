@@ -17,8 +17,10 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
-            $table->unsignedBigInteger('role_id')->default(2);
-            $table->foreign('role_id')->references('id')->on('roles');
+            // $table->unsignedBigInteger('role_id')->default(2);
+            $table->unsignedBigInteger('role_id')->nullable()->default(2);
+            // $table->foreign('role_id')->references('id')->on('roles');
+            $table->foreign('role_id')->references('id')->on('roles')->onDelete('set null');
             $table->timestamps();
         });
 
