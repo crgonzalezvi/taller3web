@@ -7,15 +7,15 @@
     <title>Document</title>
 </head>
 <body>
-    <form action="{{ route('materias.store') }}" method="POST">
+    <form action="{{ route('courses.store') }}" method="POST">
         @csrf
 
         <div class="form-group">
             <label for="materia">Materia</label>
             <select class="form-control" id="materia" name="materia" required>
                 <option value="">Seleccione una materia</option>
-                @foreach ($materias as $materia)
-                    <option value="{{ $materia->id }}">{{ $materia->name }}</option>
+                @foreach ($courses as $course)
+                    <option value="{{ $course->id }}">{{ $course->name }}</option>
                 @endforeach
             </select>
         </div>

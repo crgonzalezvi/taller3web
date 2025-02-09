@@ -1,8 +1,9 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Models\Student;
 use Illuminate\Http\Request;
+use App\Models\Course;
 
 class StudentController extends Controller
 {
@@ -11,7 +12,9 @@ class StudentController extends Controller
      */
     public function index()
     {
-        
+        $students = Student::all();
+        $courses = Course::all();
+        return view('students.index', compact('students', 'courses'));
     }
 
     /**
@@ -27,7 +30,10 @@ class StudentController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $student = new Student();
+        $student->nota = $request->nota;
+        $student->save();
+        return redirect()->route('students.index');
     }
 
     /**

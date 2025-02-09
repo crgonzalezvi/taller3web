@@ -3,16 +3,17 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Materia;
+use  App\Models\Course;
 
-class MateriaController extends Controller
+class CourseController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        
+        $courses = Course::all();
+        return view('courses.index', compact('courses'));
     }
 
     /**
@@ -28,7 +29,10 @@ class MateriaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $course = new Course();
+        $course->name = $request->name;
+        $course->save();
+        return redirect()->route('courses.index');
     }
 
     /**
