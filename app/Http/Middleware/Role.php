@@ -13,27 +13,18 @@ class Role
      *
      * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
      */
-    // public function handle(Request $request, Closure $next, $roles): Response
-    // {
-    //     $newRol = explode('|',$roles);
-    //     $roleName = strtolower($request->user()->role->label);
-    //     if(!in_array($roleName,$newRol))
-    //         return abort(403,__('Unauthorized'));
-    //     return $next($request);
-    // }
-
+  
     public function handle(Request $request, Closure $next, $roles): Response
-{
-    $newRol = explode('|', $roles);
+    {
+        $newRol = explode('|', $roles);
 
-    // Obtener el nombre del rol en lugar del ID
-    $roleName = strtolower(optional($request->user()->role)->name ?? 'sin_rol');
+        $roleName = strtolower(optional($request->user()->role)->name ?? 'sin_rol');
 
     //dd("Rol del usuario:", $roleName, "Roles permitidos:", $newRol); // Depuración
 
-    if (!in_array($roleName, $newRol)) {
-        return abort(403, __('Unauthorized'));
-    }
+        if (!in_array($roleName, $newRol)) {
+            return abort(403, __('Unauthorized'));
+        }
 
     return $next($request);
 }
