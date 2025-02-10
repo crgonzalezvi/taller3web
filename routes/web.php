@@ -61,3 +61,5 @@ Route::post('teacher/students/{id}/grade', [TeacherController::class, 'updateGra
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+

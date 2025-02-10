@@ -25,7 +25,21 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+
+
+    // protected $redirectTo = '/home';
+
+    protected function redirectTo()
+{
+    if (auth()->user()->role_id === 1) {
+        return route('teacher.students'); // Redirige a la vista de profesores
+    } elseif (auth()->user()->role_id === 2) {
+        return route('students.index'); // Redirige a la vista de estudiantes
+    }
+
+    return '/home'; // Ruta por defecto si no tiene rol
+}
+
 
     /**
      * Create a new controller instance.
