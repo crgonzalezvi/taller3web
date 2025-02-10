@@ -1,9 +1,11 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Models\Student;
 use Illuminate\Http\Request;
 use App\Models\Teacher;
+
+use Illuminate\Support\Facades\Auth;
 class TeacherController extends Controller
 {
     /**
@@ -13,6 +15,7 @@ class TeacherController extends Controller
     {
         $teachers=Teacher::all();
         return view('teachers.index', compact('teachers'));
+
     }
 
     /**
@@ -62,4 +65,40 @@ class TeacherController extends Controller
     {
         //
     }
+    public function students()
+    {
+        $teacher = Auth::user()->teacher;
+        if (!$teacher) {
+            abort(403, 'Profesor no encontrado.');
+        }
+
+        $course = $teacher->course;
+        if (!$course) {
+            abort(404, 'Curso no asignado.');
+        }
+        $students = Student::with('user')
+        ->where('course_id', $course->id)
+        ->get();
+        $students = Student::where('course_id', $course->id)->get();
+        return view('teachers.students', compact('students'));
+    }
+
+    /**
+     * Actualiza la nota de un estudiante.
+     */
+    public function updateGrade(Request $request, $id)
+    {
+        $request->validate([
+            'grade' => 'required|numeric|min:0|max:10',
+        ]);
+        // Buscar al estudiante por ID
+        $student = Student::findOrFail($id);
+        $student->nota = $request->grade;
+        $student->save();
+        return redirect()->back()->with('success', 'La nota se actualizó correctamente.');
+    }
 }
+
+
+
+

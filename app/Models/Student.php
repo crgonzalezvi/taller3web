@@ -19,4 +19,8 @@ class Student extends Model
     {
         return $this->belongsTo(Role::class, 'course_id');
     }
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

@@ -40,11 +40,12 @@ class StudentController extends Controller
         $user->password = Hash::make($request->password);
         $user->role_id = 2; // Rol de estudiante
         $user->save();
-    
+
         $student = new Student();
         $student->user_id = $user->id;
+        $student->nota = $request->nota ?? 0.0;
         $student->save();
-    
+
         return redirect()->route('login');
     }
 
@@ -87,10 +88,10 @@ class StudentController extends Controller
         if (!$student) {
             return redirect()->back()->with('error', 'No se pudo inscribir la materia.');
         }
-    
+
         $student->course_id = $request->course_id;
-        $student->save(); 
-    
+        $student->save();
+
         return redirect()->route('students.index')->with('success', 'Materia inscrita correctamente.');
     }
 }
